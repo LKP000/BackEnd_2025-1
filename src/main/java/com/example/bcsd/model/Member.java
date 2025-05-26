@@ -1,12 +1,12 @@
 package com.example.bcsd.model;
 
 public class Member {
-    private int id;
+    private Long id;
     private String name;
     private String email;
     private String password;
 
-    public Member(int id, String name, String email, String password) {
+    public Member(Long id, String name, String email, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -19,11 +19,11 @@ public class Member {
         this.password = password;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -3,7 +3,7 @@ package com.example.bcsd.model;
 import java.time.LocalDateTime;
 
 public class Article {
-    private int id;
+    private Long id;
     private Board board;
     private Member member;
     private String title;
@@ -11,7 +11,7 @@ public class Article {
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
-    public Article(int id, Board board, Member member,
+    public Article(Long id, Board board, Member member,
                    String title, String content, LocalDateTime createdDate, LocalDateTime modifiedDate) {
         this.id = id;
         this.board = board;
@@ -22,7 +22,7 @@ public class Article {
         this.modifiedDate = modifiedDate;
     }
 
-    public Article(int id, Board board, Member member, String title, String content) {
+    public Article(Long id, Board board, Member member, String title, String content) {
         this.id = id;
         this.board = board;
         this.member = member;
@@ -30,11 +30,11 @@ public class Article {
         this.content = content;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
