@@ -1,0 +1,95 @@
+[33mcommit 7decb9f66075877078a3534ed4d3a274b44d49ad[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: LKP <rud79730@gmail.com>
+Date:   Mon May 26 23:56:17 2025 +0900
+
+    feat: 예외 처리 추가
+
+[33mcommit 61ad23069a872e723aed57ce826cfde815f7304f[m
+Author: LKP <rud79730@gmail.com>
+Date:   Mon May 26 23:55:00 2025 +0900
+
+    feat: 누락 코드 추가
+
+[33mcommit c8e0db8b4a68bab5e0ae2a4023ecf3e192f82767[m
+Author: LKP <rud79730@gmail.com>
+Date:   Mon May 19 23:52:32 2025 +0900
+
+    feat: controller 작성
+
+[33mcommit 43b7ff351c35eb48f8cd77443582a8bcecae74f0[m
+Author: LKP <rud79730@gmail.com>
+Date:   Mon May 19 23:50:11 2025 +0900
+
+    feat: posts.html 작성
+
+[33mcommit f259fe160f5a580bbecc3b216dac393331b76bd0[m
+Author: LKP <rud79730@gmail.com>
+Date:   Mon May 19 23:49:30 2025 +0900
+
+    feat: service 작성
+
+[33mcommit 97b23d597c446617d5a1f8714639de7cea64ffc5[m
+Author: LKP <rud79730@gmail.com>
+Date:   Mon May 19 23:48:22 2025 +0900
+
+    feat: dto 수정
+
+[33mcommit 660b010b1bb1d611eee70fa05485e46b39fd91f4[m
+Author: LKP <rud79730@gmail.com>
+Date:   Mon May 19 23:46:08 2025 +0900
+
+    feat: repository 작성
+
+[33mcommit ac0dcec3c7cc40ba0310775b86b9bebd844de609[m
+Author: LKP <rud79730@gmail.com>
+Date:   Mon May 19 23:41:45 2025 +0900
+
+    feat: model 작성
+
+[33mcommit d1513a1251c3c38750acd1cfd8b702678b3263af[m
+Author: LKP <rud79730@gmail.com>
+Date:   Mon May 19 23:37:57 2025 +0900
+
+    feat: controller 폴더 수정
+
+[33mcommit 3cf83e14a99cee5c802098852cf7eb5b2b773307[m
+Author: LKP <rud79730@gmail.com>
+Date:   Mon May 19 23:35:21 2025 +0900
+
+    feat: 파일 작성
+
+[33mcommit 111ef182f5915c93f960bf87025673b074af9e28[m
+Author: LKP <rud79730@gmail.com>
+Date:   Mon May 5 23:45:32 2025 +0900
+
+    feat. ArticleController 클래스 작성
+
+[33mcommit 3b65e8ac1d4d3594246918f979cb13af5f7d4225[m
+Author: LKP <rud79730@gmail.com>
+Date:   Mon May 5 23:33:04 2025 +0900
+
+    feat. Article 클래스 작성
+
+[33mcommit cf75b46bd7fb2b27a117f87843924c852c51a154[m
+Author: LKP <rud79730@gmail.com>
+Date:   Mon May 5 23:24:45 2025 +0900
+
+    feat. Json 클래스 작성
+
+[33mcommit df5f18d3083edf43e7374292974faccea6fd2ab8[m
+Author: LKP <rud79730@gmail.com>
+Date:   Mon May 5 23:19:55 2025 +0900
+
+    feat. /introduce, /json 작성
+
+[33mcommit 0379815576fb7bb0cc352345caea414d4bc878f6[m
+Author: dradnats1012 <herjebi1012@gmail.com>
+Date:   Fri Apr 25 16:11:00 2025 +0900
+
+    feat: 수업 실습
+
+[33mcommit b2c2ecfbf301e5884565736690282b6ee8ebed37[m
+Author: dradnats1012 <herjebi1012@gmail.com>
+Date:   Fri Apr 25 15:33:45 2025 +0900
+
+    init
