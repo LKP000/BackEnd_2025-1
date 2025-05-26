@@ -38,6 +38,14 @@ public class Article {
         this.id = id;
     }
 
+    public Board getBoard() { return board; }
+
+    public void setBoard(Board board) { this.board = board; }
+
+    public Member getMember() { return member; }
+
+    public void setMember(Member member) { this.member = member; }
+
     public String getTitle() {
         return title;
     }
