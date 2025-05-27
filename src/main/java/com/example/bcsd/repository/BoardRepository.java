@@ -1,5 +1,6 @@
 package com.example.bcsd.repository;
 
+import com.example.bcsd.dto.ArticleDto;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -31,6 +32,15 @@ public class BoardRepository {
     public List<Board> findAll() {
         String sql = "SELECT id, name FROM board";
         return jdbcTemplate.query(sql, boardRowMapper());
+    }
+
+    public List<ArticleDto> findArticlesByBoardId(Long boardId) {
+        String sql = "SELECT id, title FROM article WHERE board_id = ?";
+        return jdbcTemplate.query(sql, (rs, rn) ->
+                new ArticleDto(rs.getLong("id"),
+                        rs.getString("title")
+                ), boardId
+        );
     }
 
     @Transactional
