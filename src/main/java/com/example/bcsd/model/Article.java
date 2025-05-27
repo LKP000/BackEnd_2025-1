@@ -30,6 +30,15 @@ public class Article {
         this.content = content;
     }
 
+    public Article(Board board, Member member, String title, String content) {
+        this.board = board;
+        this.member = member;
+        this.title = title;
+        this.content = content;
+    }
+
+    public Article() {}
+
     public Long getId() {
         return id;
     }

@@ -19,62 +19,54 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final ArticleRepository articleRepository;
 
-    public MemberService(MemberRepository memberRepository,
-                         ArticleRepository articleRepository) {
+    public MemberService(MemberRepository memberRepository, ArticleRepository articleRepository) {
         this.memberRepository = memberRepository;
         this.articleRepository = articleRepository;
     }
 
     public MemberDto getMember(Long memberId) {
-        Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new NotFoundException("해당 회원을 찾을 수 없습니다."));
-
+        Member member = findMemberById(memberId);
         return new MemberDto(member.getId(), member.getName(), member.getEmail(), member.getPassword());
     }
 
     public MemberDto createMember(MemberDto dto) {
         List<Member> members = memberRepository.findAll();
-        members.stream().filter(m -> m.getEmail().equals(dto.getEmail()))
-                .findFirst().ifPresent(m -> {
-                    throw new EmailAlreadyExistsException("이미 존재하는 이메일입니다.");
-                });
-
+        if (members.stream().anyMatch(m -> m.getEmail().equals(dto.getEmail()))) {
+            throw new EmailAlreadyExistsException("이미 존재하는 이메일입니다.");
+        }
         if (dto.getEmail() == null || dto.getPassword() == null || dto.getName() == null) {
             throw new NullRequestException("요청 값에 null이 존재합니다.");
         }
         Member member = new Member(dto.getEmail(), dto.getPassword(), dto.getName());
         memberRepository.save(member);
-
         return new MemberDto(member.getId(), member.getName(), member.getEmail(), member.getPassword());
     }
 
     public MemberDto updateMember(Long memberId, MemberDto dto) {
-        Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new NotFoundException("해당 회원을 찾을 수 없습니다."));
+        Member member = findMemberById(memberId);
 
         List<Member> members = memberRepository.findAll();
-        members.stream().filter(m -> !m.getId().equals(memberId))
-                .forEach(m -> {
-                    if (m.getEmail().equals(dto.getEmail())) {
-                        throw new EmailAlreadyExistsException("이미 존재하는 이메일입니다.");
-                    }
-                });
+        if (members.stream().anyMatch(m -> !m.getId().equals(memberId) && m.getEmail().equals(dto.getEmail()))) {
+            throw new EmailAlreadyExistsException("이미 존재하는 이메일입니다.");
+        }
         member.setEmail(dto.getEmail());
         memberRepository.save(member);
-
         return new MemberDto(member.getId(), member.getName(), member.getEmail(), member.getPassword());
     }
 
     public void deleteMember(Long memberId) {
-        Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new NotFoundException("해당 회원이 존재하지 않습니다."));
-
-        List<Article> articles = articleRepository.findByAuthorId(memberId);
+        Member member = findMemberById(memberId);
+        List<Article> articles = articleRepository.findByMemberId(memberId);
         if (!articles.isEmpty()) {
             throw new DeletionNotAllowedException("회원이 작성한 게시글이 존재합니다.");
         }
 
         memberRepository.deleteById(memberId);
+    }
+
+    private Member findMemberById(Long memberId) {
+        return memberRepository.findById(memberId)
+                .orElseThrow(() -> new NotFoundException("해당 회원을 찾을 수 없습니다."));
     }
 
 }

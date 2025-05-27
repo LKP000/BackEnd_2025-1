@@ -1,21 +1,26 @@
 package com.example.bcsd.dto;
 
-import java.util.List;
+import com.example.bcsd.model.Board;
 
 public class BoardDto {
+    private Long id;
     private String title;
-    private List<ArticleDto> articles;
 
-    public BoardDto(String title, List<ArticleDto> articles) {
+    public BoardDto(Long id, String title) {
+        this.id = id;
         this.title = title;
-        this.articles = articles;
+    }
+
+    public BoardDto(Board board) {
+        this.id = board.getId();
+        this.title = board.getTitle();
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getTitle() {
         return title;
-    }
-
-    public List<ArticleDto> getArticles() {
-        return articles;
     }
 }

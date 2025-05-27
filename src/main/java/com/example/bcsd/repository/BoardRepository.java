@@ -34,15 +34,6 @@ public class BoardRepository {
         return jdbcTemplate.query(sql, boardRowMapper());
     }
 
-    public List<ArticleDto> findArticlesByBoardId(Long boardId) {
-        String sql = "SELECT id, title FROM article WHERE board_id = ?";
-        return jdbcTemplate.query(sql, (rs, rn) ->
-                new ArticleDto(rs.getLong("id"),
-                        rs.getString("title")
-                ), boardId
-        );
-    }
-
     @Transactional
     public void save(Board board) {
         if (board.getId() != null) {
