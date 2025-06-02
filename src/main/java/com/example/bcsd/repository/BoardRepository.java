@@ -1,8 +1,7 @@
 package com.example.bcsd.repository;
 
-import com.example.bcsd.dto.ArticleDto;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import com.example.bcsd.model.Board;
@@ -13,46 +12,33 @@ import java.util.Optional;
 
 @Repository
 public class BoardRepository {
-    private final JdbcTemplate jdbcTemplate;
-
-    public BoardRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+    @PersistenceContext
+    private EntityManager em;
 
     public Optional<Board> findById(Long id) {
-        String sql = "SELECT id, name FROM board WHERE id = ?";
-        try {
-            Board board = jdbcTemplate.queryForObject(sql, boardRowMapper(), id);
-            return Optional.ofNullable(board);
-        } catch (Exception e) {
-            return Optional.empty();
-        }
+        Board board = em.find(Board.class, id);
+        return Optional.ofNullable(board);
     }
 
     public List<Board> findAll() {
-        String sql = "SELECT id, name FROM board";
-        return jdbcTemplate.query(sql, boardRowMapper());
+        String jpql = "SELECT b FROM Board b";
+        return em.createQuery(jpql, Board.class).getResultList();
     }
 
     @Transactional
     public void save(Board board) {
         if (board.getId() != null) {
-            String sql = "UPDATE board SET name = ? WHERE id = ?";
-            jdbcTemplate.update(sql, board.getTitle(), board.getId());
+            em.merge(board);
         } else {
-            String sql = "INSERT INTO board (name) VALUES (?)";
-            jdbcTemplate.update(sql, board.getTitle());
+            em.persist(board);
         }
     }
 
     @Transactional
     public void deleteById(Long id) {
-        jdbcTemplate.update("DELETE FROM board WHERE id = ?", id);
-    }
-
-    private RowMapper<Board> boardRowMapper() {
-        return (rs, rowNum) -> new Board(
-                rs.getLong("id"),
-                rs.getString("name"));
+        Board board = em.find(Board.class, id);
+        if (board != null) {
+            em.remove(board);
+        }
     }
 }
