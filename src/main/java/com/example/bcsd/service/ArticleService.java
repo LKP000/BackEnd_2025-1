@@ -49,21 +49,19 @@ public class ArticleService {
         if (boardId == null || memberId == null || title == null || content == null) {
             throw new NullRequestException("요청 값에 null이 존재합니다.");
         }
-        Board board = findBoardById(boardId);
-        Member member = findMemberById(memberId);
 
-        Article article = new Article(board, member, title, content);
+        Article article = new Article(boardId, memberId, title, content);
         articleRepository.save(article);
         return new ArticleDto(article);
     }
 
     @Transactional
     public ArticleDto updateArticle(Long id, Long boardId, Long memberId, String title, String content) {
-        Board board = findBoardById(boardId);
-        Member member = findMemberById(memberId);
+//        Board board = findBoardById(boardId);
+//        Member member = findMemberById(memberId);
         Article article = findArticleById(id);
 
-        article.setBoard(board);
+        article.setBoard(boardId);
         article.setTitle(title);
         article.setContent(content);
         article.setModifiedDate(LocalDateTime.now());

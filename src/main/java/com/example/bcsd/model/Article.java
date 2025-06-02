@@ -1,9 +1,6 @@
 package com.example.bcsd.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
@@ -12,14 +9,20 @@ public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Board board;
-    private Member member;
+//    private Board board;
+//    private Member member;
+    @Column(name = "board_id", nullable = false)
+    private Long board;
+    @Column(name = "author_id", nullable = false)
+    private Long member;
     private String title;
     private String content;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
-    public Article(Long id, Board board, Member member,
+    public Article() {}
+
+    public Article(Long id, Long board, Long member,
                    String title, String content, LocalDateTime createdDate, LocalDateTime modifiedDate) {
         this.id = id;
         this.board = board;
@@ -30,7 +33,7 @@ public class Article {
         this.modifiedDate = modifiedDate;
     }
 
-    public Article(Long id, Board board, Member member, String title, String content) {
+    public Article(Long id, Long board, Long member, String title, String content) {
         this.id = id;
         this.board = board;
         this.member = member;
@@ -38,14 +41,12 @@ public class Article {
         this.content = content;
     }
 
-    public Article(Board board, Member member, String title, String content) {
+    public Article(Long board, Long member, String title, String content) {
         this.board = board;
         this.member = member;
         this.title = title;
         this.content = content;
     }
-
-    public Article() {}
 
     public Long getId() {
         return id;
@@ -55,13 +56,13 @@ public class Article {
         this.id = id;
     }
 
-    public Board getBoard() { return board; }
+    public Long getBoard() { return board; }
 
-    public void setBoard(Board board) { this.board = board; }
+    public void setBoard(Long board) { this.board = board; }
 
-    public Member getMember() { return member; }
+    public Long getMember() { return member; }
 
-    public void setMember(Member member) { this.member = member; }
+    public void setMember(Long member) { this.member = member; }
 
     public String getTitle() {
         return title;
