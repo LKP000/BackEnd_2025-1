@@ -9,10 +9,15 @@ public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "board_id", nullable = false)
-    private Long board;
-    @Column(name = "author_id", nullable = false)
-    private Long member;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "board_id")
+    private Board board;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id")
+    private Member member;
+
     private String title;
     private String content;
     private LocalDateTime createdDate;
@@ -20,7 +25,7 @@ public class Article {
 
     public Article() {}
 
-    public Article(Long id, Long board, Long member,
+    public Article(Long id, Board board, Member member,
                    String title, String content, LocalDateTime createdDate, LocalDateTime modifiedDate) {
         this.id = id;
         this.board = board;
@@ -31,7 +36,7 @@ public class Article {
         this.modifiedDate = modifiedDate;
     }
 
-    public Article(Long id, Long board, Long member, String title, String content) {
+    public Article(Long id, Board board, Member member, String title, String content) {
         this.id = id;
         this.board = board;
         this.member = member;
@@ -39,7 +44,7 @@ public class Article {
         this.content = content;
     }
 
-    public Article(Long board, Long member, String title, String content) {
+    public Article(Board board, Member member, String title, String content) {
         this.board = board;
         this.member = member;
         this.title = title;
@@ -54,13 +59,13 @@ public class Article {
         this.id = id;
     }
 
-    public Long getBoard() { return board; }
+    public Board getBoard() { return board; }
 
-    public void setBoard(Long board) { this.board = board; }
+    public void setBoard(Board board) { this.board = board; }
 
-    public Long getMember() { return member; }
+    public Member getMember() { return member; }
 
-    public void setMember(Long member) { this.member = member; }
+    public void setMember(Member member) { this.member = member; }
 
     public String getTitle() {
         return title;

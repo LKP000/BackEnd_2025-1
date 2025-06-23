@@ -45,25 +45,29 @@ public class ArticleService {
     }
 
     @Transactional
-    public ArticleDto createArticle(Long boardId, Long memberId, String title, String content) {
-        if (boardId == null || memberId == null || title == null || content == null) {
+    public ArticleDto createArticle(ArticleDto req) {
+        if (req.getBoardId() == null || req.getMemberId() == null || req.getTitle() == null || req.getContent() == null) {
             throw new NullRequestException("요청 값에 null이 존재합니다.");
         }
 
-        Article article = new Article(boardId, memberId, title, content);
+        Member member = findMemberById(req.getMemberId());
+        Board board = findBoardById(req.getBoardId());
+        Article article = new Article(board, member, req.getTitle(), req.getContent());
+        board.addArticle(article);
+
         articleRepository.save(article);
         return new ArticleDto(article);
     }
 
     @Transactional
-    public ArticleDto updateArticle(Long id, Long boardId, Long memberId, String title, String content) {
-//        Board board = findBoardById(boardId);
-//        Member member = findMemberById(memberId);
-        Article article = findArticleById(id);
+    public ArticleDto updateArticle(Long id, ArticleDto req) {
+        Article article = findArticleById(req.getBoardId());
+        Board board = findBoardById(req.getBoardId());
+        Member member = findMemberById(req.getMemberId());
 
-        article.setBoard(boardId);
-        article.setTitle(title);
-        article.setContent(content);
+        article.setBoard(board);
+        article.setTitle(req.getTitle());
+        article.setContent(req.getContent());
         article.setModifiedDate(LocalDateTime.now());
 
         articleRepository.save(article);
@@ -73,6 +77,9 @@ public class ArticleService {
     @Transactional
     public void deleteArticle(Long id) {
         Article article = findArticleById(id);
+        Board board = findBoardById(article.getBoard().getId());
+        board.removeArticle(article);
+
         articleRepository.deleteById(article.getId());
     }
 

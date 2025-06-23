@@ -42,8 +42,8 @@ public class ArticleDto {
         String modifiedDate = article.getModifiedDate() != null ? article.getModifiedDate().toString() : LocalDate.now().toString();
         String createdDate = article.getCreatedDate() != null ? article.getCreatedDate().toString() : LocalDate.now().toString();
         this.id = article.getId();
-        this.boardId = article.getBoard();
-        this.memberId = article.getMember();
+        this.boardId = article.getBoard().getId();
+        this.memberId = article.getMember().getId();
         this.title = article.getTitle();
         this.content = article.getContent();
         this.createdDate = createdDate;
