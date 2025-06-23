@@ -9,8 +9,6 @@ public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-//    private Board board;
-//    private Member member;
     @Column(name = "board_id", nullable = false)
     private Long board;
     @Column(name = "author_id", nullable = false)
