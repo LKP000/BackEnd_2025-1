@@ -36,13 +36,13 @@ public class ArticleController {
 
     @PostMapping
     public ResponseEntity<ArticleDto> createArticle(@RequestBody ArticleDto article) {
-        ArticleDto dto = articleService.createArticle(article.getBoardId(), article.getMemberId(), article.getTitle(), article.getContent());
+        ArticleDto dto = articleService.createArticle(article);
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ArticleDto> updateArticle(@PathVariable(name = "id") Long id, @RequestBody ArticleDto article) {
-        ArticleDto dto = articleService.updateArticle(id, article.getBoardId(), article.getMemberId(), article.getTitle(), article.getContent());
+        ArticleDto dto = articleService.updateArticle(id, article);
         return ResponseEntity.ok().body(dto);
     }
 
